@@ -1,10 +1,6 @@
-# compositionLocalOf vs staticCompositionLocalOf
-
-[← Back to README](../README.md)
-
 Sample: [`CompositionLocalScreen.kt`](../app/src/main/java/fr/dappli/androidsandbox/compose/compositionlocal/CompositionLocalScreen.kt)
 
-## What is a CompositionLocal?
+### What is a CompositionLocal?
 
 A `CompositionLocal` passes data down the composition tree implicitly, without
 adding a parameter to every composable in between. You:
@@ -19,7 +15,7 @@ If nothing provides a value, `.current` returns the default. In the sample, that
 Compose itself uses this pattern for `LocalContext`, `LocalDensity`,
 `MaterialTheme` (`LocalColorScheme`, `LocalTypography`), and others.
 
-## The two factories
+### The two factories
 
 | | `compositionLocalOf` | `staticCompositionLocalOf` |
 |---|---|---|
@@ -28,7 +24,7 @@ Compose itself uses this pattern for `LocalContext`, `LocalDensity`,
 | Cost of reading | Slightly higher (each read is tracked) | Lower (no tracking) |
 | Use it for | Values that change | Values that rarely or never change (theme, configuration, injected dependencies) |
 
-## The sample
+### The sample
 
 ```kotlin
 private val LocalDynamicCounter = compositionLocalOf { DEFAULT_COUNTER_IF_NOT_PROVIDED }
@@ -42,12 +38,11 @@ button increments it. The same `counter` is provided to both locals:
 CompositionLocalProvider(LocalDynamicCounter provides counter) {
     MyComponent("compositionLocalOf")              // does NOT read the local
     Text("counter = ${LocalDynamicCounter.current}") // reads the local
-    HorizontalDivider()
 }
+
 CompositionLocalProvider(LocalStaticCounter provides counter) {
     MyComponent("staticCompositionLocalOf")        // does NOT read the local
     Text("counter = ${LocalStaticCounter.current}")  // reads the local
-    HorizontalDivider()
 }
 ```
 
@@ -63,7 +58,7 @@ private fun MyComponent(name: String) {
 }
 ```
 
-### Counting compositions
+#### Counting compositions
 
 ```kotlin
 @Composable
@@ -81,7 +76,7 @@ so changing it doesn't trigger another recomposition.
 > This writes during composition, which is fine for a debugging demo but should be
 > avoided in real code. Use the Layout Inspector's recomposition counts instead.
 
-### What you see
+#### What you see
 
 After tapping **Update provider** twice:
 
@@ -104,7 +99,7 @@ counter = 3
   content without skipping. `MyComponent` recomposes even though it never reads the
   local, so its count goes up on every tap.
 
-## Which one to choose
+### Which one to choose
 
 - The value **changes** (a counter, user state, anything driven by `State`):
   use `compositionLocalOf`, so only the readers recompose.

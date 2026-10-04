@@ -31,6 +31,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    sourceSets {
+        getByName("main") {
+            // Ship the docs as assets so screens can render them.
+            assets.directories.add(rootProject.file("doc").path)
+        }
+    }
     buildFeatures {
         compose = true
     }
@@ -48,6 +54,7 @@ dependencies {
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.navigation3.ui)
     implementation(libs.kotlinx.serialization.core)
+    implementation(libs.markdown.renderer.m3)
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
