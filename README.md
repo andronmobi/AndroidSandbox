@@ -2,4 +2,4 @@
 
 ## Compose
 
-Voir [doc/Compose.md](doc/Compose.md).
+- [compositionLocalOf vs staticCompositionLocalOf](doc/CompositionLocal.md)
