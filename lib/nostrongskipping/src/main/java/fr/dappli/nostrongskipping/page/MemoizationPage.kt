@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import fr.dappli.common.AssetMarkdown
 import fr.dappli.common.PageColumn
 import fr.dappli.common.RecomposeParentButton
 import fr.dappli.common.rememberCompositionCount
@@ -28,6 +29,9 @@ fun MemoizationPage() {
         LambdaComponent {
             println("items: $immutableItems")
         }
+
+        HorizontalDivider()
+        AssetMarkdown("nostrongskipping/Memoization.md")
     }
 }
 

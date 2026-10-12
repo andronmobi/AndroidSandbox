@@ -1,10 +1,12 @@
 package fr.dappli.nostrongskipping.page
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
+import fr.dappli.common.AssetMarkdown
+import fr.dappli.common.PageColumn
 
 @Composable
 internal fun ReadmePage() {
-    Column { }
+    PageColumn {
+        AssetMarkdown("nostrongskipping/README.md")
+    }
 }
-
