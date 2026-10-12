@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -14,14 +13,12 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
-import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,7 +29,9 @@ import androidx.navigation3.ui.NavDisplay
 import fr.dappli.androidsandbox.compose.compositionlocal.CompositionLocalScreen
 import fr.dappli.androidsandbox.navigation.CompositionLocal
 import fr.dappli.androidsandbox.navigation.Home
+import fr.dappli.androidsandbox.navigation.NonStrongSkipping
 import fr.dappli.androidsandbox.ui.theme.AndroidSandboxTheme
+import fr.dappli.nostrongskipping.NonStrongSkippingScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,6 +62,9 @@ class MainActivity : ComponentActivity() {
                             entry<CompositionLocal> {
                                 CompositionLocalScreen()
                             }
+                            entry<NonStrongSkipping> {
+                                NonStrongSkippingScreen()
+                            }
                         }
                     )
                 }
@@ -73,6 +75,7 @@ class MainActivity : ComponentActivity() {
 
 private val composeItems = listOf<Pair<String, NavKey>>(
     "CompositionLocal" to CompositionLocal,
+    "Non strong skipping mode" to NonStrongSkipping,
 )
 
 private fun titleOf(key: NavKey): String? =

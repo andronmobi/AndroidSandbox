@@ -31,20 +31,25 @@ private val LocalDynamicCounter = compositionLocalOf { DEFAULT_COUNTER_IF_NOT_PR
 private val LocalStaticCounter = staticCompositionLocalOf { DEFAULT_COUNTER_IF_NOT_PROVIDED }
 ```
 
-The screen holds one `counter` state, starting at `1`. An **Update provider**
-button increments it. The same `counter` is provided to both locals:
+The screen holds one `recompositions` state, starting at `0`. A **Recompose
+parent** button increments it. The same value is provided to both locals:
 
 ```kotlin
-CompositionLocalProvider(LocalDynamicCounter provides counter) {
-    MyComponent("compositionLocalOf")              // does NOT read the local
-    Text("counter = ${LocalDynamicCounter.current}") // reads the local
+var recompositions by remember { mutableIntStateOf(0) }
+RecomposeParentButton(recompositions, onClick = { recompositions++ })
+
+CompositionLocalProvider(LocalDynamicCounter provides recompositions) {
+    MyComponent("compositionLocalOf")                  // does NOT read the local
+    println("counter = ${LocalDynamicCounter.current}") // reads the local
 }
 
-CompositionLocalProvider(LocalStaticCounter provides counter) {
-    MyComponent("staticCompositionLocalOf")        // does NOT read the local
-    Text("counter = ${LocalStaticCounter.current}")  // reads the local
+CompositionLocalProvider(LocalStaticCounter provides recompositions) {
+    MyComponent("staticCompositionLocalOf")            // does NOT read the local
+    println("counter = ${LocalStaticCounter.current}")  // reads the local
 }
 ```
+
+The value read from each local is printed to Logcat rather than shown on screen.
 
 `MyComponent` never reads either local. Its `name` parameter never changes, so it
 is skippable. It shows how many times it has been composed:
@@ -60,9 +65,11 @@ private fun MyComponent(name: String) {
 
 #### Counting compositions
 
+`rememberCompositionCount()` lives in `compose/extensions`:
+
 ```kotlin
 @Composable
-private fun rememberCompositionCount(): Int {
+fun rememberCompositionCount(): Int {
     val count = remember { IntArray(1) }
     count[0]++
     return count[0]
@@ -78,22 +85,23 @@ so changing it doesn't trigger another recomposition.
 
 #### What you see
 
-After tapping **Update provider** twice:
+After tapping **Recompose parent** twice, the screen shows:
 
 ```
+Recompose parent (2)
 with compositionLocalOf
 composition = 1          ← skipped: MyComponent doesn't read the local
-counter = 3              ← updated: this Text reads LocalDynamicCounter.current
 ───────────────
 with staticCompositionLocalOf
 composition = 3          ← recomposed each time, even though it doesn't read the local
-counter = 3
 ───────────────
 ```
 
-- **`compositionLocalOf`**: Compose knows exactly which composables read the
-  local. Only the `Text` that reads `.current` is invalidated. `MyComponent` is
-  skipped, so its count stays at `1`.
+and Logcat prints `counter = 0` (first composition), `counter = 1` and `counter = 2` for each local.
+
+- **`compositionLocalOf`**: Compose knows exactly which code reads the local.
+  Only the provider content that reads `.current` (here, the `println`) runs
+  again. `MyComponent` is skipped, so its count stays at `1`.
 - **`staticCompositionLocalOf`**: Compose doesn't track reads. When the value
   changes, it can't know who depends on it, so it recomposes the whole provider
   content without skipping. `MyComponent` recomposes even though it never reads the

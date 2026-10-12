@@ -23,7 +23,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mikepenz.markdown.m3.Markdown
+import fr.dappli.androidsandbox.compose.extensions.rememberCompositionCount
 import fr.dappli.androidsandbox.ui.theme.AndroidSandboxTheme
+import fr.dappli.common.PageColumn
+import fr.dappli.common.RecomposeParentButton
 
 private const val DEFAULT_COUNTER_IF_NOT_PROVIDED = 0
 
@@ -40,28 +43,20 @@ private val LocalStaticCounter = staticCompositionLocalOf { DEFAULT_COUNTER_IF_N
 
 @Composable
 fun CompositionLocalScreen(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        var counter by remember { mutableIntStateOf(1) }
-        Button(onClick = { counter++ }) {
-            Text("Update provider")
-        }
+    PageColumn(modifier) {
+        var recompositions by remember { mutableIntStateOf(0) }
+        RecomposeParentButton(recompositions, onClick = { recompositions++ })
 
-        CompositionLocalProvider(LocalDynamicCounter provides counter) {
+        CompositionLocalProvider(LocalDynamicCounter provides recompositions) {
             MyComponent("compositionLocalOf")
-            Text("counter = ${LocalDynamicCounter.current}")
+            println("counter = ${LocalDynamicCounter.current}")
         }
 
         HorizontalDivider()
 
-        CompositionLocalProvider(LocalStaticCounter provides counter) {
+        CompositionLocalProvider(LocalStaticCounter provides recompositions) {
             MyComponent("staticCompositionLocalOf")
-            Text("counter = ${LocalStaticCounter.current}")
+            println("counter = ${LocalStaticCounter.current}")
         }
 
         val context = LocalContext.current
@@ -79,14 +74,6 @@ private fun MyComponent(name: String) {
     val composition = rememberCompositionCount()
     Text("with $name")
     Text("composition = $composition")
-}
-
-/** Counts how many times the calling composable has been (re)composed. */
-@Composable
-private fun rememberCompositionCount(): Int {
-    val count = remember { IntArray(1) }
-    count[0]++
-    return count[0]
 }
 
 @Preview(showBackground = true)

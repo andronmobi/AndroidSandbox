@@ -8,3 +8,9 @@ data object Home : NavKey
 
 @Serializable
 data object CompositionLocal : NavKey
+
+@Serializable
+data object StableImmutable : NavKey
+
+@Serializable
+data object NonStrongSkipping : NavKey
