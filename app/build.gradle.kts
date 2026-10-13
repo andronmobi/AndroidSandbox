@@ -35,6 +35,8 @@ android {
         getByName("main") {
             // Ship the docs as assets so screens can render them.
             assets.directories.add(rootProject.file("doc").path)
+            // Ship the sources as assets so screens can show their own code (see AssetCode).
+            assets.directories.add(file("src/main/java").path)
         }
     }
     buildFeatures {
