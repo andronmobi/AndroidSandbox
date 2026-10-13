@@ -19,6 +19,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    sourceSets {
+        getByName("main") {
+            // Ship the sources as assets so pages can show their own code (see AssetCode).
+            assets.directories.add(file("src/main/java").path)
+        }
+    }
     buildFeatures {
         compose = true
     }

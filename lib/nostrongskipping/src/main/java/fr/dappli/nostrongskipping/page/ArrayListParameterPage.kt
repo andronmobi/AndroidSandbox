@@ -21,6 +21,7 @@ fun ArrayListParameterPage() {
             RecomposeParentButton(recompositions, onClick = { recompositions++ })
             LambdaComponent(items)
         },
+        code = "fr/dappli/nostrongskipping/page/ArrayListParameterPage.kt",
         doc = { AssetMarkdown("nostrongskipping/ArrayListParameter.md") }
     )
 }
