@@ -4,27 +4,31 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.ListItem
-import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
@@ -32,7 +36,10 @@ import androidx.navigation3.ui.NavDisplay
 import fr.dappli.androidsandbox.compose.compositionlocal.CompositionLocalScreen
 import fr.dappli.androidsandbox.navigation.CompositionLocal
 import fr.dappli.androidsandbox.navigation.Home
+import fr.dappli.androidsandbox.navigation.NonStrongSkipping
 import fr.dappli.androidsandbox.ui.theme.AndroidSandboxTheme
+import fr.dappli.common.SectionTitle
+import fr.dappli.nostrongskipping.NonStrongSkippingScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,6 +70,9 @@ class MainActivity : ComponentActivity() {
                             entry<CompositionLocal> {
                                 CompositionLocalScreen()
                             }
+                            entry<NonStrongSkipping> {
+                                NonStrongSkippingScreen()
+                            }
                         }
                     )
                 }
@@ -71,12 +81,23 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private val composeItems = listOf<Pair<String, NavKey>>(
-    "CompositionLocal" to CompositionLocal,
+private data class HomeItem(val title: String, val subtitle: String, val key: NavKey)
+
+private val composeItems = listOf(
+    HomeItem(
+        title = "CompositionLocal",
+        subtitle = "compositionLocalOf vs staticCompositionLocalOf",
+        key = CompositionLocal
+    ),
+    HomeItem(
+        title = "Non strong skipping mode",
+        subtitle = "Stability and skipping when strong skipping is off",
+        key = NonStrongSkipping
+    ),
 )
 
 private fun titleOf(key: NavKey): String? =
-    composeItems.firstOrNull { it.second == key }?.first
+    composeItems.firstOrNull { it.key == key }?.title
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -98,20 +119,48 @@ fun AppTopBar(title: String, canNavigateBack: Boolean, onBack: () -> Unit) {
 
 @Composable
 fun HomeScreen(onItemClick: (NavKey) -> Unit, modifier: Modifier = Modifier) {
-    LazyColumn(modifier = modifier.fillMaxSize()) {
+    LazyColumn(
+        modifier = modifier.fillMaxSize(),
+        contentPadding = PaddingValues(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
         item {
-            ListItem(
-                headlineContent = { Text("Compose", style = MaterialTheme.typography.titleLarge) }
-            )
+            SectionTitle("Compose")
         }
-        composeItems.forEach { (title, key) ->
-            item {
-                ListItem(
-                    headlineContent = { Text(title, style = MaterialTheme.typography.bodyMedium) },
-                    modifier = Modifier.clickable { onItemClick(key) }
+        items(composeItems, key = { it.title }) { item ->
+            HomeItemCard(item, onClick = { onItemClick(item.key) })
+        }
+    }
+}
+
+@Composable
+private fun HomeItemCard(item: HomeItem, onClick: () -> Unit) {
+    Surface(
+        onClick = onClick,
+        shape = RoundedCornerShape(16.dp),
+        color = MaterialTheme.colorScheme.surfaceContainerHigh,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 14.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(2.dp)
+            ) {
+                Text(item.title, style = MaterialTheme.typography.titleMedium)
+                Text(
+                    item.subtitle,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
-                HorizontalDivider()
             }
+            Icon(
+                painter = painterResource(R.drawable.ic_chevron_right),
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
     }
 }

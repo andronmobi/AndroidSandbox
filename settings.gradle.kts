@@ -24,3 +24,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "AndroidSandbox"
 include(":app")
+include(":lib:common")
+include(":lib:nostrongskipping")

@@ -43,6 +43,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":lib:common"))
+    implementation(project(":lib:nostrongskipping"))
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
@@ -53,6 +55,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.navigation3.ui)
+    implementation(libs.kotlinx.collections.immutable)
     implementation(libs.kotlinx.serialization.core)
     implementation(libs.markdown.renderer.m3)
     testImplementation(libs.junit)
