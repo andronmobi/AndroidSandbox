@@ -26,6 +26,7 @@ fun ListParameterPage() {
             HorizontalDivider()
             UnknownStabilityComponent(immutableItems)
         },
+        code = "fr/dappli/nostrongskipping/page/ListParameterPage.kt",
         doc = { AssetMarkdown("nostrongskipping/ListParameter.md") }
     )
 }

@@ -27,4 +27,5 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui)
     implementation(libs.markdown.renderer.m3)
+    implementation(libs.markdown.renderer.code)
 }

@@ -33,6 +33,7 @@ fun ArrayListPropertyPage() {
             HorizontalDivider()
             StableComponent(stablePersons)
         },
+        code = "fr/dappli/nostrongskipping/page/ArrayListPropertyPage.kt",
         doc = { AssetMarkdown("nostrongskipping/ArrayListProperty.md") }
     )
 }

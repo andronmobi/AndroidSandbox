@@ -31,6 +31,7 @@ fun MemoizationPage() {
                 println("items: $immutableItems")
             }
         },
+        code = "fr/dappli/nostrongskipping/page/MemoizationPage.kt",
         doc = { AssetMarkdown("nostrongskipping/Memoization.md") }
     )
 }

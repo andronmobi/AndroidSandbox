@@ -31,6 +31,7 @@ fun VarPropertyPage() {
             HorizontalDivider()
             StableComponent(StablePerson("Frank"))
         },
+        code = "fr/dappli/nostrongskipping/page/VarPropertyPage.kt",
         doc = { AssetMarkdown("nostrongskipping/VarProperty.md") }
     )
 }

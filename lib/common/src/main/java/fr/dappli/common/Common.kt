@@ -1,5 +1,6 @@
 package fr.dappli.common
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -14,7 +15,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -28,13 +33,15 @@ fun rememberCompositionCount(): Int {
 }
 
 /**
- * A scrollable page made of two sections: an optional live [sample] on top,
+ * A scrollable page made of up to three sections: an optional live [sample] on top,
+ * then the optional source file at [code] (an [AssetCode] path, collapsed by default),
  * then its [doc] (usually an [AssetMarkdown]).
  */
 @Composable
 fun PageColumn(
     modifier: Modifier = Modifier,
     sample: (@Composable ColumnScope.() -> Unit)? = null,
+    code: String? = null,
     doc: @Composable ColumnScope.() -> Unit,
 ) {
     Column(
@@ -51,6 +58,15 @@ fun PageColumn(
                 content = sample
             )
         }
+        if (code != null) {
+            PageSection(
+                title = "Code",
+                containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                collapsible = true,
+            ) {
+                AssetCode(code)
+            }
+        }
         PageSection(
             title = "Documentation",
             containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
@@ -63,20 +79,31 @@ fun PageColumn(
 private fun PageSection(
     title: String,
     containerColor: Color,
+    collapsible: Boolean = false,
     content: @Composable ColumnScope.() -> Unit,
 ) {
+    var expanded by rememberSaveable { mutableStateOf(!collapsible) }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        SectionTitle(title)
-        Surface(
-            shape = RoundedCornerShape(16.dp),
-            color = containerColor,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Column(
-                modifier = Modifier.padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                content = content
+        if (collapsible) {
+            SectionTitle(
+                title = "$title ${if (expanded) "▾" else "▸"}",
+                modifier = Modifier.clickable { expanded = !expanded }
             )
+        } else {
+            SectionTitle(title)
+        }
+        if (expanded) {
+            Surface(
+                shape = RoundedCornerShape(16.dp),
+                color = containerColor,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    content = content
+                )
+            }
         }
     }
 }
