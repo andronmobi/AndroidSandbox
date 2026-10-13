@@ -59,9 +59,10 @@ fun PageColumn(
             )
         }
         if (code != null) {
+            // AssetCode draws its own code block container.
             PageSection(
                 title = "Code",
-                containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                containerColor = null,
                 collapsible = true,
             ) {
                 AssetCode(code)
@@ -78,7 +79,7 @@ fun PageColumn(
 @Composable
 private fun PageSection(
     title: String,
-    containerColor: Color,
+    containerColor: Color?,
     collapsible: Boolean = false,
     content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -93,16 +94,23 @@ private fun PageSection(
             SectionTitle(title)
         }
         if (expanded) {
-            Surface(
-                shape = RoundedCornerShape(16.dp),
-                color = containerColor,
-                modifier = Modifier.fillMaxWidth()
-            ) {
+            if (containerColor == null) {
                 Column(
-                    modifier = Modifier.padding(16.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                     content = content
                 )
+            } else {
+                Surface(
+                    shape = RoundedCornerShape(16.dp),
+                    color = containerColor,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
+                        content = content
+                    )
+                }
             }
         }
     }
