@@ -14,3 +14,6 @@ data object StableImmutable : NavKey
 
 @Serializable
 data object NonStrongSkipping : NavKey
+
+@Serializable
+data object StrongSkipping : NavKey

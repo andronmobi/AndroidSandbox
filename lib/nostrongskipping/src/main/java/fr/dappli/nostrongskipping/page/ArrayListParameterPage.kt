@@ -13,7 +13,7 @@ import fr.dappli.common.RecomposeParentButton
 import fr.dappli.common.rememberCompositionCount
 
 @Composable
-fun ArrayListParameterPage() {
+fun ArrayListParameterPage(docPath: String) {
     var recompositions by remember { mutableIntStateOf(0) }
     val items = remember { arrayListOf("Bob", "François", "Ivan") }
     PageColumn(
@@ -22,7 +22,7 @@ fun ArrayListParameterPage() {
             LambdaComponent(items)
         },
         code = "fr/dappli/nostrongskipping/page/ArrayListParameterPage.kt",
-        doc = { AssetMarkdown("nostrongskipping/ArrayListParameter.md") }
+        doc = { AssetMarkdown(docPath) }
     )
 }
 

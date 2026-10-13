@@ -11,12 +11,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import fr.dappli.androidsandbox.compose.extensions.rememberCompositionCount
-import fr.dappli.androidsandbox.ui.theme.AndroidSandboxTheme
 import fr.dappli.common.AssetMarkdown
 import fr.dappli.common.PageColumn
 import fr.dappli.common.RecomposeParentButton
+import fr.dappli.common.rememberCompositionCount
 
 private const val DEFAULT_COUNTER_IF_NOT_PROVIDED = 0
 
@@ -51,6 +49,7 @@ fun CompositionLocalScreen(modifier: Modifier = Modifier) {
                 println("counter = ${LocalStaticCounter.current}")
             }
         },
+        code = "fr/dappli/androidsandbox/compose/compositionlocal/CompositionLocalScreen.kt",
         doc = { AssetMarkdown(DOC_ASSET) }
     )
 }
@@ -61,12 +60,4 @@ private fun MyComponent(name: String) {
     val composition = rememberCompositionCount()
     Text("with $name")
     Text("composition = $composition")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun CompositionLocalScreenPreview() {
-    AndroidSandboxTheme {
-        CompositionLocalScreen()
-    }
 }

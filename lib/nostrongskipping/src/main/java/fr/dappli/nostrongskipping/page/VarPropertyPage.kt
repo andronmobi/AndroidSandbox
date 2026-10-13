@@ -21,24 +21,24 @@ data class UnstablePerson(var name: String)
 data class StablePerson(var name: String)
 
 @Composable
-fun VarPropertyPage() {
+fun VarPropertyPage(docPath: String) {
     var recompositions by remember { mutableIntStateOf(0) }
     PageColumn(
         sample = {
             RecomposeParentButton(recompositions, onClick = { recompositions++ })
 
-            LambdaComponent(UnstablePerson("Bob"))
+            UnstableComponent(UnstablePerson("Bob"))
             HorizontalDivider()
             StableComponent(StablePerson("Frank"))
         },
         code = "fr/dappli/nostrongskipping/page/VarPropertyPage.kt",
-        doc = { AssetMarkdown("nostrongskipping/VarProperty.md") }
+        doc = { AssetMarkdown(docPath) }
     )
 }
 
 @Suppress("ParamsComparedByRef")
 @Composable
-private fun LambdaComponent(unstablePerson: UnstablePerson) {
+private fun UnstableComponent(unstablePerson: UnstablePerson) {
     Column {
         Text("Compositions: ${rememberCompositionCount()}")
         Text(" - ${unstablePerson.name}")

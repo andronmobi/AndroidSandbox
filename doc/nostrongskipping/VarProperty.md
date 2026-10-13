@@ -19,7 +19,7 @@ From the compiler report:
 unstable class UnstablePerson { stable var name: String }
 stable class StablePerson { stable var name: String }
 
-restartable fun LambdaComponent(unstable unstablePerson: UnstablePerson)
+restartable fun UnstableComponent(unstable unstablePerson: UnstablePerson)
 restartable skippable fun StableComponent(stable stablePerson: StablePerson)
 ```
 
@@ -28,7 +28,7 @@ restartable skippable fun StableComponent(stable stablePerson: StablePerson)
 Both objects are created again on every recomposition, with the same name:
 
 ```kotlin
-LambdaComponent(UnstablePerson("Bob"))
+UnstableComponent(UnstablePerson("Bob"))
 StableComponent(StablePerson("Frank"))
 ```
 
@@ -37,7 +37,7 @@ StableComponent(StablePerson("Frank"))
 After tapping **Recompose parent** twice:
 
 ```
-Compositions: 3     ← LambdaComponent: not skippable, recomposes every time
+Compositions: 3     ← UnstableComponent: not skippable, recomposes every time
  - Bob
 ───────────────
 Compositions: 1     ← StableComponent: the new StablePerson equals() the old one, skipped
