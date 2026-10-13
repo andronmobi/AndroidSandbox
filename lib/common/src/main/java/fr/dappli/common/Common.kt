@@ -66,12 +66,7 @@ private fun PageSection(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text(
-            text = title.uppercase(),
-            style = MaterialTheme.typography.labelLarge,
-            color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.padding(horizontal = 4.dp)
-        )
+        SectionTitle(title)
         Surface(
             shape = RoundedCornerShape(16.dp),
             color = containerColor,
@@ -84,6 +79,17 @@ private fun PageSection(
             )
         }
     }
+}
+
+/** Small uppercase heading shown above a section's card. */
+@Composable
+fun SectionTitle(title: String, modifier: Modifier = Modifier) {
+    Text(
+        text = title.uppercase(),
+        style = MaterialTheme.typography.labelLarge,
+        color = MaterialTheme.colorScheme.primary,
+        modifier = modifier.padding(horizontal = 4.dp)
+    )
 }
 
 @Composable
