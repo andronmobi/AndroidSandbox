@@ -21,7 +21,7 @@ data class UnstablePerson(var name: String)
 data class StablePerson(var name: String)
 
 @Composable
-fun VarPropertyPage() {
+fun VarPropertyPage(docPath: String) {
     var recompositions by remember { mutableIntStateOf(0) }
     PageColumn(
         sample = {
@@ -32,7 +32,7 @@ fun VarPropertyPage() {
             StableComponent(StablePerson("Frank"))
         },
         code = "fr/dappli/nostrongskipping/page/VarPropertyPage.kt",
-        doc = { AssetMarkdown("nostrongskipping/VarProperty.md") }
+        doc = { AssetMarkdown(docPath) }
     )
 }
 

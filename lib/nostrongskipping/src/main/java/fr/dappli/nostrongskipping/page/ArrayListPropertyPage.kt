@@ -21,7 +21,7 @@ data class UnstablePersons(val names: ArrayList<String>)
 data class StablePersons(val names: ArrayList<String>)
 
 @Composable
-fun ArrayListPropertyPage() {
+fun ArrayListPropertyPage(docPath: String) {
     var recompositions by remember { mutableIntStateOf(0) }
     val unstablePersons = remember { UnstablePersons(arrayListOf("Bob", "François", "Ivan")) }
     val stablePersons = remember { StablePersons(arrayListOf("John", "Olivier", "Karl")) }
@@ -34,7 +34,7 @@ fun ArrayListPropertyPage() {
             StableComponent(stablePersons)
         },
         code = "fr/dappli/nostrongskipping/page/ArrayListPropertyPage.kt",
-        doc = { AssetMarkdown("nostrongskipping/ArrayListProperty.md") }
+        doc = { AssetMarkdown(docPath) }
     )
 }
 

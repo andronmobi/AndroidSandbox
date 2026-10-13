@@ -5,6 +5,6 @@ import fr.dappli.common.AssetMarkdown
 import fr.dappli.common.PageColumn
 
 @Composable
-internal fun ReadmePage() {
-    PageColumn { AssetMarkdown("nostrongskipping/README.md") }
+fun ReadmePage(docPath: String) {
+    PageColumn { AssetMarkdown(docPath) }
 }

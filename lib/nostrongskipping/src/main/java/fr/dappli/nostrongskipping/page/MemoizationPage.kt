@@ -14,7 +14,7 @@ import fr.dappli.common.rememberCompositionCount
 import kotlinx.collections.immutable.toImmutableList
 
 @Composable
-fun MemoizationPage() {
+fun MemoizationPage(docPath: String) {
     var recompositions by remember { mutableIntStateOf(0) }
 
     PageColumn(
@@ -32,7 +32,7 @@ fun MemoizationPage() {
             }
         },
         code = "fr/dappli/nostrongskipping/page/MemoizationPage.kt",
-        doc = { AssetMarkdown("nostrongskipping/Memoization.md") }
+        doc = { AssetMarkdown(docPath) }
     )
 }
 

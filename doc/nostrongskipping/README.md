@@ -1,4 +1,4 @@
-Sample: [`NonStrongSkippingScreen.kt`](../../lib/nostrongskipping/src/main/java/fr/dappli/nostrongskipping/NonStrongSkippingScreen.kt)
+Samples: [`page/`](../../lib/nostrongskipping/src/main/java/fr/dappli/nostrongskipping/page/), shown by [`SkippingScreen.kt`](../../lib/common/src/main/java/fr/dappli/common/SkippingScreen.kt)
 
 ### What is strong skipping?
 

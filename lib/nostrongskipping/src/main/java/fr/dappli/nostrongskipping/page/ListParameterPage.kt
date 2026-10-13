@@ -14,7 +14,7 @@ import fr.dappli.common.RecomposeParentButton
 import fr.dappli.common.rememberCompositionCount
 
 @Composable
-fun ListParameterPage() {
+fun ListParameterPage(docPath: String) {
     var recompositions by remember { mutableIntStateOf(0) }
     val unstableItems = remember { arrayListOf("Bob", "François", "Ivan") }
     val immutableItems = remember { listOf("John", "Olivier", "Karl") }
@@ -27,7 +27,7 @@ fun ListParameterPage() {
             UnknownStabilityComponent(immutableItems)
         },
         code = "fr/dappli/nostrongskipping/page/ListParameterPage.kt",
-        doc = { AssetMarkdown("nostrongskipping/ListParameter.md") }
+        doc = { AssetMarkdown(docPath) }
     )
 }
 

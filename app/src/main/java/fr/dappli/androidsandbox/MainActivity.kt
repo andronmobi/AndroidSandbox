@@ -34,12 +34,25 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import fr.dappli.androidsandbox.compose.compositionlocal.CompositionLocalScreen
+import fr.dappli.androidsandbox.compose.strongskipping.page.ArrayListParameterPage as StrongArrayListParameterPage
+import fr.dappli.androidsandbox.compose.strongskipping.page.ArrayListPropertyPage as StrongArrayListPropertyPage
+import fr.dappli.androidsandbox.compose.strongskipping.page.ListParameterPage as StrongListParameterPage
+import fr.dappli.androidsandbox.compose.strongskipping.page.MemoizationPage as StrongMemoizationPage
+import fr.dappli.androidsandbox.compose.strongskipping.page.ReadmePage as StrongReadmePage
+import fr.dappli.androidsandbox.compose.strongskipping.page.VarPropertyPage as StrongVarPropertyPage
 import fr.dappli.androidsandbox.navigation.CompositionLocal
 import fr.dappli.androidsandbox.navigation.Home
 import fr.dappli.androidsandbox.navigation.NonStrongSkipping
+import fr.dappli.androidsandbox.navigation.StrongSkipping
 import fr.dappli.androidsandbox.ui.theme.AndroidSandboxTheme
 import fr.dappli.common.SectionTitle
-import fr.dappli.nostrongskipping.NonStrongSkippingScreen
+import fr.dappli.common.SkippingScreen
+import fr.dappli.nostrongskipping.page.ArrayListParameterPage
+import fr.dappli.nostrongskipping.page.ArrayListPropertyPage
+import fr.dappli.nostrongskipping.page.ListParameterPage
+import fr.dappli.nostrongskipping.page.MemoizationPage
+import fr.dappli.nostrongskipping.page.ReadmePage
+import fr.dappli.nostrongskipping.page.VarPropertyPage
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,7 +84,36 @@ class MainActivity : ComponentActivity() {
                                 CompositionLocalScreen()
                             }
                             entry<NonStrongSkipping> {
-                                NonStrongSkippingScreen()
+                                SkippingScreen(
+                                    readmeDoc = "nostrongskipping/README.md",
+                                    varPropertyDoc = "nostrongskipping/VarProperty.md",
+                                    arrayListParameterDoc = "nostrongskipping/ArrayListParameter.md",
+                                    listParameterDoc = "nostrongskipping/ListParameter.md",
+                                    arrayListPropertyDoc = "nostrongskipping/ArrayListProperty.md",
+                                    memoizationDoc = "nostrongskipping/Memoization.md",
+                                    readme = { ReadmePage(it) },
+                                    varProperty = { VarPropertyPage(it) },
+                                    arrayListParameter = { ArrayListParameterPage(it) },
+                                    listParameter = { ListParameterPage(it) },
+                                    arrayListProperty = { ArrayListPropertyPage(it) },
+                                    memoization = { MemoizationPage(it) },
+                                )
+                            }
+                            entry<StrongSkipping> {
+                                SkippingScreen(
+                                    readmeDoc = "strongskipping/README.md",
+                                    varPropertyDoc = "strongskipping/VarProperty.md",
+                                    arrayListParameterDoc = "strongskipping/ArrayListParameter.md",
+                                    listParameterDoc = "strongskipping/ListParameter.md",
+                                    arrayListPropertyDoc = "strongskipping/ArrayListProperty.md",
+                                    memoizationDoc = "strongskipping/Memoization.md",
+                                    readme = { StrongReadmePage(it) },
+                                    varProperty = { StrongVarPropertyPage(it) },
+                                    arrayListParameter = { StrongArrayListParameterPage(it) },
+                                    listParameter = { StrongListParameterPage(it) },
+                                    arrayListProperty = { StrongArrayListPropertyPage(it) },
+                                    memoization = { StrongMemoizationPage(it) },
+                                )
                             }
                         }
                     )
@@ -93,6 +135,11 @@ private val composeItems = listOf(
         title = "Non strong skipping mode",
         subtitle = "Stability and skipping when strong skipping is off",
         key = NonStrongSkipping
+    ),
+    HomeItem(
+        title = "Strong skipping mode",
+        subtitle = "Same samples with strong skipping on (the default)",
+        key = StrongSkipping
     ),
 )
 
