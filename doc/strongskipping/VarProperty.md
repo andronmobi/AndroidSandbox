@@ -14,11 +14,11 @@ data class StablePerson(var name: String)
 It changes what an unstable parameter means. From the compiler report:
 
 ```
-restartable skippable fun LambdaComponent(unstable unstablePerson: UnstablePerson)
+restartable skippable fun UnstableComponent(unstable unstablePerson: UnstablePerson)
 restartable skippable fun StableComponent(stable stablePerson: StablePerson)
 ```
 
-`LambdaComponent` is now `skippable` too. Its unstable parameter is compared by
+`UnstableComponent` is now `skippable` too. Its unstable parameter is compared by
 instance (`===`), the stable one keeps using `equals()`.
 
 ### The sample
@@ -26,7 +26,7 @@ instance (`===`), the stable one keeps using `equals()`.
 Both objects are created again on every recomposition, with the same name:
 
 ```kotlin
-LambdaComponent(UnstablePerson("Bob"))
+UnstableComponent(UnstablePerson("Bob"))
 StableComponent(StablePerson("Frank"))
 ```
 
@@ -35,7 +35,7 @@ StableComponent(StablePerson("Frank"))
 After tapping **Recompose parent** twice:
 
 ```
-Compositions: 3     ← LambdaComponent: a new UnstablePerson, not === the old one
+Compositions: 3     ← UnstableComponent: a new UnstablePerson, not === the old one
  - Bob
 ───────────────
 Compositions: 1     ← StableComponent: the new StablePerson equals() the old one, skipped
@@ -43,7 +43,7 @@ Compositions: 1     ← StableComponent: the new StablePerson equals() the old o
 ```
 
 The same result as without strong skipping, for a different reason:
-`LambdaComponent` is skippable, but it receives a **new instance** each time, and
+`UnstableComponent` is skippable, but it receives a **new instance** each time, and
 instance comparison ignores `equals()`. Remember the object
 (`remember { UnstablePerson("Bob") }`) and it would be skipped.
 

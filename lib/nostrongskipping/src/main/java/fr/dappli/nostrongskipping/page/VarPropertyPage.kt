@@ -27,7 +27,7 @@ fun VarPropertyPage(docPath: String) {
         sample = {
             RecomposeParentButton(recompositions, onClick = { recompositions++ })
 
-            LambdaComponent(UnstablePerson("Bob"))
+            UnstableComponent(UnstablePerson("Bob"))
             HorizontalDivider()
             StableComponent(StablePerson("Frank"))
         },
@@ -38,7 +38,7 @@ fun VarPropertyPage(docPath: String) {
 
 @Suppress("ParamsComparedByRef")
 @Composable
-private fun LambdaComponent(unstablePerson: UnstablePerson) {
+private fun UnstableComponent(unstablePerson: UnstablePerson) {
     Column {
         Text("Compositions: ${rememberCompositionCount()}")
         Text(" - ${unstablePerson.name}")
