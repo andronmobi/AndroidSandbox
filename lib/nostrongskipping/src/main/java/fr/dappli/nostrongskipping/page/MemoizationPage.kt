@@ -17,22 +17,22 @@ import kotlinx.collections.immutable.toImmutableList
 fun MemoizationPage() {
     var recompositions by remember { mutableIntStateOf(0) }
 
-    PageColumn {
-        val unstableItems = remember { arrayListOf("Bob", "François", "Ivan") }
-        val immutableItems = remember { listOf("John", "Olivier", "Karl").toImmutableList() }
-        RecomposeParentButton(recompositions, onClick = { recompositions++ })
+    PageColumn(
+        sample = {
+            val unstableItems = remember { arrayListOf("Bob", "François", "Ivan") }
+            val immutableItems = remember { listOf("John", "Olivier", "Karl").toImmutableList() }
+            RecomposeParentButton(recompositions, onClick = { recompositions++ })
 
-        LambdaComponent {
-            println("items: $unstableItems")
-        }
-        HorizontalDivider()
-        LambdaComponent {
-            println("items: $immutableItems")
-        }
-
-        HorizontalDivider()
-        AssetMarkdown("nostrongskipping/Memoization.md")
-    }
+            LambdaComponent {
+                println("items: $unstableItems")
+            }
+            HorizontalDivider()
+            LambdaComponent {
+                println("items: $immutableItems")
+            }
+        },
+        doc = { AssetMarkdown("nostrongskipping/Memoization.md") }
+    )
 }
 
 @Composable

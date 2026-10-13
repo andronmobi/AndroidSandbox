@@ -23,16 +23,16 @@ data class StablePerson(var name: String)
 @Composable
 fun VarPropertyPage() {
     var recompositions by remember { mutableIntStateOf(0) }
-    PageColumn {
-        RecomposeParentButton(recompositions, onClick = { recompositions++ })
+    PageColumn(
+        sample = {
+            RecomposeParentButton(recompositions, onClick = { recompositions++ })
 
-        LambdaComponent(UnstablePerson("Bob"))
-        HorizontalDivider()
-        StableComponent(StablePerson("Frank"))
-
-        HorizontalDivider()
-        AssetMarkdown("nostrongskipping/VarProperty.md")
-    }
+            LambdaComponent(UnstablePerson("Bob"))
+            HorizontalDivider()
+            StableComponent(StablePerson("Frank"))
+        },
+        doc = { AssetMarkdown("nostrongskipping/VarProperty.md") }
+    )
 }
 
 @Suppress("ParamsComparedByRef")

@@ -25,16 +25,16 @@ fun ArrayListPropertyPage() {
     var recompositions by remember { mutableIntStateOf(0) }
     val unstablePersons = remember { UnstablePersons(arrayListOf("Bob", "François", "Ivan")) }
     val stablePersons = remember { StablePersons(arrayListOf("John", "Olivier", "Karl")) }
-    PageColumn {
-        RecomposeParentButton(recompositions, onClick = { recompositions++ })
+    PageColumn(
+        sample = {
+            RecomposeParentButton(recompositions, onClick = { recompositions++ })
 
-        LambdaComponent(unstablePersons)
-        HorizontalDivider()
-        StableComponent(stablePersons)
-
-        HorizontalDivider()
-        AssetMarkdown("nostrongskipping/ArrayListProperty.md")
-    }
+            LambdaComponent(unstablePersons)
+            HorizontalDivider()
+            StableComponent(stablePersons)
+        },
+        doc = { AssetMarkdown("nostrongskipping/ArrayListProperty.md") }
+    )
 }
 
 @Suppress("ParamsComparedByRef")

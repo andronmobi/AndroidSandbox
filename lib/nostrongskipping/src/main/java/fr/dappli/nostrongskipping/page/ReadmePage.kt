@@ -6,7 +6,5 @@ import fr.dappli.common.PageColumn
 
 @Composable
 internal fun ReadmePage() {
-    PageColumn {
-        AssetMarkdown("nostrongskipping/README.md")
-    }
+    PageColumn { AssetMarkdown("nostrongskipping/README.md") }
 }

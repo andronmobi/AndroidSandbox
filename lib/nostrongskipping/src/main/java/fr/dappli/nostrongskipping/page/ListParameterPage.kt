@@ -18,16 +18,16 @@ fun ListParameterPage() {
     var recompositions by remember { mutableIntStateOf(0) }
     val unstableItems = remember { arrayListOf("Bob", "François", "Ivan") }
     val immutableItems = remember { listOf("John", "Olivier", "Karl") }
-    PageColumn {
-        RecomposeParentButton(recompositions, onClick = { recompositions++ })
+    PageColumn(
+        sample = {
+            RecomposeParentButton(recompositions, onClick = { recompositions++ })
 
-        UnknownStabilityComponent(unstableItems)
-        HorizontalDivider()
-        UnknownStabilityComponent(immutableItems)
-
-        HorizontalDivider()
-        AssetMarkdown("nostrongskipping/ListParameter.md")
-    }
+            UnknownStabilityComponent(unstableItems)
+            HorizontalDivider()
+            UnknownStabilityComponent(immutableItems)
+        },
+        doc = { AssetMarkdown("nostrongskipping/ListParameter.md") }
+    )
 }
 
 @Composable

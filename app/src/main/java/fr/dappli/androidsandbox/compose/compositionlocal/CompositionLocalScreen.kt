@@ -33,24 +33,26 @@ private val LocalStaticCounter = staticCompositionLocalOf { DEFAULT_COUNTER_IF_N
 
 @Composable
 fun CompositionLocalScreen(modifier: Modifier = Modifier) {
-    PageColumn(modifier) {
-        var recompositions by remember { mutableIntStateOf(0) }
-        RecomposeParentButton(recompositions, onClick = { recompositions++ })
+    PageColumn(
+        modifier = modifier,
+        sample = {
+            var recompositions by remember { mutableIntStateOf(0) }
+            RecomposeParentButton(recompositions, onClick = { recompositions++ })
 
-        CompositionLocalProvider(LocalDynamicCounter provides recompositions) {
-            MyComponent("compositionLocalOf")
-            println("counter = ${LocalDynamicCounter.current}")
-        }
+            CompositionLocalProvider(LocalDynamicCounter provides recompositions) {
+                MyComponent("compositionLocalOf")
+                println("counter = ${LocalDynamicCounter.current}")
+            }
 
-        HorizontalDivider()
+            HorizontalDivider()
 
-        CompositionLocalProvider(LocalStaticCounter provides recompositions) {
-            MyComponent("staticCompositionLocalOf")
-            println("counter = ${LocalStaticCounter.current}")
-        }
-        HorizontalDivider()
-        AssetMarkdown(DOC_ASSET)
-    }
+            CompositionLocalProvider(LocalStaticCounter provides recompositions) {
+                MyComponent("staticCompositionLocalOf")
+                println("counter = ${LocalStaticCounter.current}")
+            }
+        },
+        doc = { AssetMarkdown(DOC_ASSET) }
+    )
 }
 
 
