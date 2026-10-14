@@ -34,6 +34,7 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import fr.dappli.androidsandbox.compose.compositionlocal.CompositionLocalScreen
+import fr.dappli.androidsandbox.compose.performance.mistake1.PerformanceMistake1Screen
 import fr.dappli.androidsandbox.compose.strongskipping.page.ArrayListParameterPage as StrongArrayListParameterPage
 import fr.dappli.androidsandbox.compose.strongskipping.page.ArrayListPropertyPage as StrongArrayListPropertyPage
 import fr.dappli.androidsandbox.compose.strongskipping.page.ListParameterPage as StrongListParameterPage
@@ -43,6 +44,7 @@ import fr.dappli.androidsandbox.compose.strongskipping.page.VarPropertyPage as S
 import fr.dappli.androidsandbox.navigation.CompositionLocal
 import fr.dappli.androidsandbox.navigation.Home
 import fr.dappli.androidsandbox.navigation.NonStrongSkipping
+import fr.dappli.androidsandbox.navigation.PerformanceMistake1
 import fr.dappli.androidsandbox.navigation.StrongSkipping
 import fr.dappli.androidsandbox.ui.theme.AndroidSandboxTheme
 import fr.dappli.common.SectionTitle
@@ -115,6 +117,9 @@ class MainActivity : ComponentActivity() {
                                     memoization = { StrongMemoizationPage(it) },
                                 )
                             }
+                            entry<PerformanceMistake1> {
+                                PerformanceMistake1Screen()
+                            }
                         }
                     )
                 }
@@ -140,6 +145,11 @@ private val composeItems = listOf(
         title = "Strong skipping mode",
         subtitle = "Same samples with strong skipping on (the default)",
         key = StrongSkipping
+    ),
+    HomeItem(
+        title = "Performance mistake 1",
+        subtitle = "Filtering a list in composition without remember",
+        key = PerformanceMistake1
     ),
 )
 
