@@ -31,6 +31,9 @@ private fun Screen(viewModel: MyViewModel) {
     ItemList(items = uiState.items)
 }
 
+/**
+ * With strong skipping, List parameters are fine for performance.
+ */
 @Composable
 private fun ItemList(items: List<UiItem>) {
     Column {

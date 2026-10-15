@@ -41,6 +41,9 @@ fun SearchControls(
     }
 }
 
+/**
+ * With strong skipping, List parameters are fine for performance.
+ */
 @Composable
 fun ItemList(items: List<UiItem>) {
     Column {

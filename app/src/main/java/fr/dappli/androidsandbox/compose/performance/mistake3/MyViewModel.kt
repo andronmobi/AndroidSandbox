@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.update
 data class UiItem(val label: String)
 
 data class UiState(
-    val items: List<UiItem>,
+    val items: List<UiItem>, // with strong skipping, List parameters are fine for performance.
     val isLoading: Boolean = false,
 )
 
