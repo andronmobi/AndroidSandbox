@@ -28,3 +28,5 @@ AndroidSandbox is where I experiment with small, focused examples and keep notes
   - [Fix 4: derivedStateOf and deferred reads](doc/performance/Fix4.md)
   - [Mistake 5: lambdas capturing a value recomputed in composition](doc/performance/Mistake5.md)
   - [Fix 5: capture something stable, compute at click time](doc/performance/Fix5.md)
+  - [Mistake 6: LazyColumn without keys](doc/performance/Mistake6.md)
+  - [Fix 6: give each item a stable key](doc/performance/Fix6.md)

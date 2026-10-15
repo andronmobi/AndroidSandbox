@@ -39,6 +39,7 @@ import fr.dappli.androidsandbox.compose.performance.mistake2.PerformanceMistake2
 import fr.dappli.androidsandbox.compose.performance.mistake3.PerformanceMistake3Screen
 import fr.dappli.androidsandbox.compose.performance.mistake4.PerformanceMistake4Screen
 import fr.dappli.androidsandbox.compose.performance.mistake5.PerformanceMistake5Screen
+import fr.dappli.androidsandbox.compose.performance.mistake6.PerformanceMistake6Screen
 import fr.dappli.androidsandbox.compose.strongskipping.page.ArrayListParameterPage as StrongArrayListParameterPage
 import fr.dappli.androidsandbox.compose.strongskipping.page.ArrayListPropertyPage as StrongArrayListPropertyPage
 import fr.dappli.androidsandbox.compose.strongskipping.page.ListParameterPage as StrongListParameterPage
@@ -53,6 +54,7 @@ import fr.dappli.androidsandbox.navigation.PerformanceMistake2
 import fr.dappli.androidsandbox.navigation.PerformanceMistake3
 import fr.dappli.androidsandbox.navigation.PerformanceMistake4
 import fr.dappli.androidsandbox.navigation.PerformanceMistake5
+import fr.dappli.androidsandbox.navigation.PerformanceMistake6
 import fr.dappli.androidsandbox.navigation.StrongSkipping
 import fr.dappli.androidsandbox.ui.theme.AndroidSandboxTheme
 import fr.dappli.common.SectionTitle
@@ -140,6 +142,9 @@ class MainActivity : ComponentActivity() {
                             entry<PerformanceMistake5> {
                                 PerformanceMistake5Screen()
                             }
+                            entry<PerformanceMistake6> {
+                                PerformanceMistake6Screen()
+                            }
                         }
                     )
                 }
@@ -190,6 +195,11 @@ private val composeItems = listOf(
         title = "Performance mistake 5",
         subtitle = "Lambdas capturing a value recomputed in composition",
         key = PerformanceMistake5
+    ),
+    HomeItem(
+        title = "Performance mistake 6",
+        subtitle = "LazyColumn without keys",
+        key = PerformanceMistake6
     ),
 )
 
