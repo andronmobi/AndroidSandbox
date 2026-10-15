@@ -37,6 +37,7 @@ import fr.dappli.androidsandbox.compose.compositionlocal.CompositionLocalScreen
 import fr.dappli.androidsandbox.compose.performance.mistake1.PerformanceMistake1Screen
 import fr.dappli.androidsandbox.compose.performance.mistake2.PerformanceMistake2Screen
 import fr.dappli.androidsandbox.compose.performance.mistake3.PerformanceMistake3Screen
+import fr.dappli.androidsandbox.compose.performance.mistake4.PerformanceMistake4Screen
 import fr.dappli.androidsandbox.compose.strongskipping.page.ArrayListParameterPage as StrongArrayListParameterPage
 import fr.dappli.androidsandbox.compose.strongskipping.page.ArrayListPropertyPage as StrongArrayListPropertyPage
 import fr.dappli.androidsandbox.compose.strongskipping.page.ListParameterPage as StrongListParameterPage
@@ -49,6 +50,7 @@ import fr.dappli.androidsandbox.navigation.NonStrongSkipping
 import fr.dappli.androidsandbox.navigation.PerformanceMistake1
 import fr.dappli.androidsandbox.navigation.PerformanceMistake2
 import fr.dappli.androidsandbox.navigation.PerformanceMistake3
+import fr.dappli.androidsandbox.navigation.PerformanceMistake4
 import fr.dappli.androidsandbox.navigation.StrongSkipping
 import fr.dappli.androidsandbox.ui.theme.AndroidSandboxTheme
 import fr.dappli.common.SectionTitle
@@ -130,6 +132,9 @@ class MainActivity : ComponentActivity() {
                             entry<PerformanceMistake3> {
                                 PerformanceMistake3Screen()
                             }
+                            entry<PerformanceMistake4> {
+                                PerformanceMistake4Screen()
+                            }
                         }
                     )
                 }
@@ -170,6 +175,11 @@ private val composeItems = listOf(
         title = "Performance mistake 3",
         subtitle = "Passing the whole state object instead of the fields",
         key = PerformanceMistake3
+    ),
+    HomeItem(
+        title = "Performance mistake 4",
+        subtitle = "Reading fast-changing state too high",
+        key = PerformanceMistake4
     ),
 )
 

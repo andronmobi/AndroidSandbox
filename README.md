@@ -24,3 +24,5 @@ AndroidSandbox is where I experiment with small, focused examples and keep notes
   - [Fix 2: map the items in their own flow](doc/performance/Fix2.md)
   - [Mistake 3: passing the whole state object](doc/performance/Mistake3.md)
   - [Fix 3: pass only the fields the composable uses](doc/performance/Fix3.md)
+  - [Mistake 4: reading fast-changing state too high](doc/performance/Mistake4.md)
+  - [Fix 4: derivedStateOf and deferred reads](doc/performance/Fix4.md)
