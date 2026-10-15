@@ -20,3 +20,6 @@ data object StrongSkipping : NavKey
 
 @Serializable
 data object PerformanceMistake1 : NavKey
+
+@Serializable
+data object PerformanceMistake2 : NavKey

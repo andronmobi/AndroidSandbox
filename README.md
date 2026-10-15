@@ -20,3 +20,5 @@ AndroidSandbox is where I experiment with small, focused examples and keep notes
 - Performance mistakes
   - [Mistake 1: filtering a list in composition](doc/performance/Mistake1.md)
   - [Fix 1: remember the filtered list](doc/performance/Fix1.md)
+  - [Mistake 2: rebuilding lists on unrelated changes](doc/performance/Mistake2.md)
+  - [Fix 2: map the items in their own flow](doc/performance/Fix2.md)
