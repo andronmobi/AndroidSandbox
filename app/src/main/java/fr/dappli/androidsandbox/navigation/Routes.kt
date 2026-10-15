@@ -29,3 +29,6 @@ data object PerformanceMistake3 : NavKey
 
 @Serializable
 data object PerformanceMistake4 : NavKey
+
+@Serializable
+data object PerformanceMistake5 : NavKey
