@@ -34,6 +34,12 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import fr.dappli.androidsandbox.compose.compositionlocal.CompositionLocalScreen
+import fr.dappli.androidsandbox.compose.performance.mistake1.PerformanceMistake1Screen
+import fr.dappli.androidsandbox.compose.performance.mistake2.PerformanceMistake2Screen
+import fr.dappli.androidsandbox.compose.performance.mistake3.PerformanceMistake3Screen
+import fr.dappli.androidsandbox.compose.performance.mistake4.PerformanceMistake4Screen
+import fr.dappli.androidsandbox.compose.performance.mistake5.PerformanceMistake5Screen
+import fr.dappli.androidsandbox.compose.performance.mistake6.PerformanceMistake6Screen
 import fr.dappli.androidsandbox.compose.strongskipping.page.ArrayListParameterPage as StrongArrayListParameterPage
 import fr.dappli.androidsandbox.compose.strongskipping.page.ArrayListPropertyPage as StrongArrayListPropertyPage
 import fr.dappli.androidsandbox.compose.strongskipping.page.ListParameterPage as StrongListParameterPage
@@ -43,6 +49,12 @@ import fr.dappli.androidsandbox.compose.strongskipping.page.VarPropertyPage as S
 import fr.dappli.androidsandbox.navigation.CompositionLocal
 import fr.dappli.androidsandbox.navigation.Home
 import fr.dappli.androidsandbox.navigation.NonStrongSkipping
+import fr.dappli.androidsandbox.navigation.PerformanceMistake1
+import fr.dappli.androidsandbox.navigation.PerformanceMistake2
+import fr.dappli.androidsandbox.navigation.PerformanceMistake3
+import fr.dappli.androidsandbox.navigation.PerformanceMistake4
+import fr.dappli.androidsandbox.navigation.PerformanceMistake5
+import fr.dappli.androidsandbox.navigation.PerformanceMistake6
 import fr.dappli.androidsandbox.navigation.StrongSkipping
 import fr.dappli.androidsandbox.ui.theme.AndroidSandboxTheme
 import fr.dappli.common.SectionTitle
@@ -115,6 +127,24 @@ class MainActivity : ComponentActivity() {
                                     memoization = { StrongMemoizationPage(it) },
                                 )
                             }
+                            entry<PerformanceMistake1> {
+                                PerformanceMistake1Screen()
+                            }
+                            entry<PerformanceMistake2> {
+                                PerformanceMistake2Screen()
+                            }
+                            entry<PerformanceMistake3> {
+                                PerformanceMistake3Screen()
+                            }
+                            entry<PerformanceMistake4> {
+                                PerformanceMistake4Screen()
+                            }
+                            entry<PerformanceMistake5> {
+                                PerformanceMistake5Screen()
+                            }
+                            entry<PerformanceMistake6> {
+                                PerformanceMistake6Screen()
+                            }
                         }
                     )
                 }
@@ -140,6 +170,36 @@ private val composeItems = listOf(
         title = "Strong skipping mode",
         subtitle = "Same samples with strong skipping on (the default)",
         key = StrongSkipping
+    ),
+    HomeItem(
+        title = "Performance mistake 1",
+        subtitle = "Filtering a list in composition without remember",
+        key = PerformanceMistake1
+    ),
+    HomeItem(
+        title = "Performance mistake 2",
+        subtitle = "ViewModel rebuilding lists on unrelated changes",
+        key = PerformanceMistake2
+    ),
+    HomeItem(
+        title = "Performance mistake 3",
+        subtitle = "Passing the whole state object instead of the fields",
+        key = PerformanceMistake3
+    ),
+    HomeItem(
+        title = "Performance mistake 4",
+        subtitle = "Reading fast-changing state too high",
+        key = PerformanceMistake4
+    ),
+    HomeItem(
+        title = "Performance mistake 5",
+        subtitle = "Lambdas capturing a value recomputed in composition",
+        key = PerformanceMistake5
+    ),
+    HomeItem(
+        title = "Performance mistake 6",
+        subtitle = "LazyColumn without keys",
+        key = PerformanceMistake6
     ),
 )
 
