@@ -22,3 +22,5 @@ AndroidSandbox is where I experiment with small, focused examples and keep notes
   - [Fix 1: remember the filtered list](doc/performance/Fix1.md)
   - [Mistake 2: rebuilding lists on unrelated changes](doc/performance/Mistake2.md)
   - [Fix 2: map the items in their own flow](doc/performance/Fix2.md)
+  - [Mistake 3: passing the whole state object](doc/performance/Mistake3.md)
+  - [Fix 3: pass only the fields the composable uses](doc/performance/Fix3.md)
