@@ -5,33 +5,3 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data object Home : NavKey
-
-@Serializable
-data object CompositionLocal : NavKey
-
-@Serializable
-data object StableImmutable : NavKey
-
-@Serializable
-data object NonStrongSkipping : NavKey
-
-@Serializable
-data object StrongSkipping : NavKey
-
-@Serializable
-data object PerformanceMistake1 : NavKey
-
-@Serializable
-data object PerformanceMistake2 : NavKey
-
-@Serializable
-data object PerformanceMistake3 : NavKey
-
-@Serializable
-data object PerformanceMistake4 : NavKey
-
-@Serializable
-data object PerformanceMistake5 : NavKey
-
-@Serializable
-data object PerformanceMistake6 : NavKey
