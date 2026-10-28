@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -21,6 +22,7 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import fr.dappli.androidsandbox.compose.composeItems
+import fr.dappli.androidsandbox.extension.isLandscapeOrientation
 import fr.dappli.androidsandbox.home.HomeScreen
 import fr.dappli.androidsandbox.home.homeItems
 import fr.dappli.androidsandbox.navigation.Home
@@ -37,10 +39,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             AndroidSandboxTheme {
                 val backStack = rememberNavBackStack(Home)
+                // A landscape Playback takes the whole screen, with no top bar or insets.
+                val fullscreen = backStack.lastOrNull() is Playback && isLandscapeOrientation()
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     topBar = {
-                        AppTopBar(
+                        if (!fullscreen) AppTopBar(
                             title = backStack.lastOrNull()?.let(::titleOf)
                                 ?: stringResource(R.string.app_name),
                             canNavigateBack = backStack.size > 1,
@@ -51,7 +55,7 @@ class MainActivity : ComponentActivity() {
                     NavDisplay(
                         backStack = backStack,
                         onBack = { backStack.removeLastOrNull() },
-                        modifier = Modifier.padding(innerPadding),
+                        modifier = Modifier.padding(if (fullscreen) PaddingValues() else innerPadding),
                         entryProvider = entryProvider {
                             entry<Home> {
                                 HomeScreen(onItemClick = { backStack.add(it) })
