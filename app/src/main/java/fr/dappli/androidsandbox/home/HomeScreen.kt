@@ -11,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import fr.dappli.androidsandbox.navigation.Compose
+import fr.dappli.androidsandbox.navigation.Player
 import fr.dappli.androidsandbox.ui.NavItem
 import fr.dappli.androidsandbox.ui.NavItemCard
 import fr.dappli.androidsandbox.ui.theme.AndroidSandboxTheme
@@ -20,6 +21,11 @@ val homeItems = listOf(
         title = "Compose",
         subtitle = "CompositionLocal, skipping modes and performance mistakes",
         key = Compose
+    ),
+    NavItem(
+        title = "Player",
+        subtitle = "Live and on demand HLS / DASH streams with ExoPlayer",
+        key = Player
     ),
 )
 

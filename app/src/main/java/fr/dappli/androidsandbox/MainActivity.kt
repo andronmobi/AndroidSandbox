@@ -24,7 +24,10 @@ import fr.dappli.androidsandbox.compose.composeItems
 import fr.dappli.androidsandbox.home.HomeScreen
 import fr.dappli.androidsandbox.home.homeItems
 import fr.dappli.androidsandbox.navigation.Home
+import fr.dappli.androidsandbox.navigation.Playback
 import fr.dappli.androidsandbox.navigation.composeEntries
+import fr.dappli.androidsandbox.navigation.playerEntries
+import fr.dappli.androidsandbox.player.streamOf
 import fr.dappli.androidsandbox.ui.theme.AndroidSandboxTheme
 
 class MainActivity : ComponentActivity() {
@@ -54,6 +57,7 @@ class MainActivity : ComponentActivity() {
                                 HomeScreen(onItemClick = { backStack.add(it) })
                             }
                             composeEntries(onNavigate = { backStack.add(it) })
+                            playerEntries(onNavigate = { backStack.add(it) })
                         }
                     )
                 }
@@ -63,7 +67,8 @@ class MainActivity : ComponentActivity() {
 }
 
 private fun titleOf(key: NavKey): String? =
-    (homeItems + composeItems).firstOrNull { it.key == key }?.title
+    if (key is Playback) streamOf(key.streamId)?.title
+    else (homeItems + composeItems).firstOrNull { it.key == key }?.title
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
